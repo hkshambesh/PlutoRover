@@ -36,7 +36,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ProgramController.cs" />
     <Compile Include="Core\RoverManager.cs" />
+    <Compile Include="Interfaces\IProgramController.cs" />
     <Compile Include="Interfaces\IRoverManager.cs" />
     <Compile Include="Models\Rover.cs" />
     <Compile Include="Models\Enums\Command.cs" />
