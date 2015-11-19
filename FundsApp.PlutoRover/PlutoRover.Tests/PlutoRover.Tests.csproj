@@ -54,8 +54,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="CommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoverMockTests.cs" />
+    <Compile Include="RoverTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PlutoRover\PlutoRover.csproj">
