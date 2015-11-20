@@ -1,5 +1,7 @@
-﻿using PlutoRover.Interfaces;
+﻿using System;
+using PlutoRover.Interfaces;
 using PlutoRover.Models;
+using PlutoRover.Models.Enums;
 
 namespace PlutoRover.Core.Commands
 {
@@ -7,7 +9,40 @@ namespace PlutoRover.Core.Commands
     {
         public Position ExecuteCommand(Rover rover)
         {
-            throw new System.NotImplementedException();
+            if (rover == null)
+            {
+                throw new NullReferenceException("Rover cannot be null");
+            }
+
+            return new Position
+            {
+                X = rover.Position.X,
+                Y = rover.Position.Y,
+                Direction = GetDirection(rover.Position.Direction)
+            };
+        }
+
+        private Direction GetDirection(Direction currentDirection)
+        {
+            Direction direction = Direction.Unknown;
+
+            switch (currentDirection)
+            {
+                case Direction.N:
+                    direction = Direction.W;
+                    break;
+                case Direction.W:
+                    direction = Direction.S;
+                    break;
+                case Direction.S:
+                    direction = Direction.E;
+                    break;
+                case Direction.E:
+                    direction = Direction.N;
+                    break;
+            }
+
+            return direction;
         }
     }
 }

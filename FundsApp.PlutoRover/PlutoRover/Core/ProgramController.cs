@@ -16,17 +16,24 @@ namespace PlutoRover.Core
 
         public Position ExecuteCommands(Position position, string commands)
         {
-            char[] cmds = commands.ToCharArray();
-
-            foreach (char command in cmds)
+            try
             {
-                var rover = new Rover
-                {
-                    Position = position,
-                    Command =  (Command)Enum.Parse(typeof(Command), command.ToString().ToUpper())
-                };
+                char[] cmds = commands.ToCharArray();
 
-                position = _roverManager.Move(rover);
+                foreach (char command in cmds)
+                {
+                    var rover = new Rover
+                    {
+                        Position = position,
+                        Command = (Command)Enum.Parse(typeof(Command), command.ToString().ToUpper())
+                    };
+
+                    position = _roverManager.Move(rover);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("failed to execute command: " + commands, ex);
             }
 
             return position;

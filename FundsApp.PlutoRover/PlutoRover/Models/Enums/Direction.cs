@@ -4,6 +4,9 @@ namespace PlutoRover.Models.Enums
 {
     public enum Direction
     {
+        [Description("Unknown")]
+        Unknown = 0,
+
         [Description("North")]
         N,
 

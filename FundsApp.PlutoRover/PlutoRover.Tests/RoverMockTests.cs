@@ -62,55 +62,5 @@ namespace PlutoRover.Tests
             Assert.AreEqual(expectedY, actual.Y);
             Assert.AreEqual(expectedDirection, actual.Direction);
         }
-
-        [TestCase(0,0,Direction.N, "FFRFF")]
-        public void When_rover_is_set_to_move_with_multiple_commands_test(int x, int y, Direction direction, string commands)
-        {
-            // act
-            var currentPosition = new Position
-            {
-                X = x,
-                Y = y,
-                Direction = direction
-            };
-
-            var roverF0 = GenerateRoverObj(0, 0, Direction.N, Command.F);
-            var roverF1 = GenerateRoverObj(0, 1, Direction.N, Command.F);
-            var roverF2 = GenerateRoverObj(0, 2, Direction.N, Command.F);
-            var roverR3 = GenerateRoverObj(0, 1, Direction.N, Command.R);
-            var roverF4 = GenerateRoverObj(1, 1, Direction.N, Command.F);
-            var roverF5 = GenerateRoverObj(2, 2, Direction.N, Command.F);
-
-            _mockIRoverManager.Setup(m => m.Move(roverF0)).Returns(roverF0.Position);
-            _mockIRoverManager.Setup(m => m.Move(roverF1)).Returns(roverF1.Position);
-            _mockIRoverManager.Setup(m => m.Move(roverF2)).Returns(roverF2.Position);
-            _mockIRoverManager.Setup(m => m.Move(roverR3)).Returns(roverR3.Position);
-            _mockIRoverManager.Setup(m => m.Move(roverF4)).Returns(roverF4.Position);
-            _mockIRoverManager.Setup(m => m.Move(roverF5)).Returns(roverF5.Position);
-
-            var programController = new ProgramController(_mockIRoverManager.Object);
-
-            // actual
-            var actual = programController.ExecuteCommands(currentPosition, commands);
-
-            // assert
-            Assert.AreEqual(2, actual.X);
-            Assert.AreEqual(2, actual.Y);
-            Assert.AreEqual(Direction.E, actual.Direction);
-        }
-
-        private Rover GenerateRoverObj(int x, int y, Direction direction, Command command)
-        {
-            return new Rover
-            {
-                Position = new Position
-                {
-                    X = x,
-                    Y = y,
-                    Direction = direction
-                },
-                Command = command
-            };
-        }
     }
 }
